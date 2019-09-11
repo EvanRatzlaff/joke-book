@@ -1,0 +1,19 @@
+
+
+<%= form_for @user do |f| %>
+
+    <ul>
+    <%= f.label :email %>
+    <li><%= f.text_field :email %></li>
+    <br>
+    <br>
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+    <br>
+    <br>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+    </ul>
+    <br>
+    <%= f.submit "Create An Account", class: "btn-submit" %>
+    <% end %>

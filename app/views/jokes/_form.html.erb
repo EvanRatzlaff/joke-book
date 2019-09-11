@@ -1,0 +1,16 @@
+<ul>
+<%# render joke errors needed %>
+</ul>
+<%= form_for @joke do |f| %>
+<div class="input-field">
+    <%= f.text_field :title %>
+    <%= f.label :title %>
+</div>
+
+<div class="input-field">
+    <%= f.text_field :content %>
+    <%= f.label :content %>
+</div>
+
+<%= f.submit  %>
+<% end %>

@@ -1,0 +1,19 @@
+<h1 class="center">Jokes that you've logged</h1>
+<table class="highlight"> 
+    <thead>
+    <tr>
+        <th> Title </th>
+        <th> Edit </th>
+        <th> Delete </th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @jokes.each do |joke|%>
+    <tr>
+    <td><%= link_to joke.title, joke_path(joke) %></td>
+    <td><%= link_to "Edit Joke", "#" %></td>
+    <td><%= link_to "Delete Joke", "#" %></td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>
