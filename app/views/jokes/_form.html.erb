@@ -1,16 +1,27 @@
 <ul>
-<%# render joke errors needed %>
-</ul>
-<%= form_for @joke do |f| %>
-<div class="input-field">
-    <%= f.text_field :title %>
-    <%= f.label :title %>
-</div>
-
-<div class="input-field">
-    <%= f.text_field :content %>
-    <%= f.label :content %>
-</div>
-
-<%= f.submit  %>
+<% if flash[:alert].present? %>
+<%= flash[:alert] %>
 <% end %>
+</ul>
+<%= form_for [user, joke] do |f| %>
+
+<%= f.text_field :title %>
+<%= f.label :title %>
+<br>
+<%= f.text_field :content %>
+<%= f.label :content %>
+<br>
+
+<%= f.label :room %>
+<%= f.collection_select :room_id, Room.all, :id, :name %>
+<%= f.hidden_field :user_id %>
+
+
+<%= f.submit button_name, class: "btn purple darken-1"  %>
+<% end %>
+
+
+<script>$(document).ready(function(){
+    $('select').formSelect();
+  });
+ </script>

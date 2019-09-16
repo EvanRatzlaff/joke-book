@@ -1,7 +1,21 @@
+<ul>
+<% if flash[:alert].present? %>
+<%= flash[:alert] %>
+<% end %>
+</ul>
 <h3><%= @joke.title %></h3>
 <p><%= @joke.content %></p>
+<p><%= @joke.likes.count %> <%= (@joke.likes.count) == 1 ? 'Like' : 'Likes' %></p>
+<% pre_like = @joke.likes.find { |like| like.user_id == current_user.id} %>
+<%# if pre_like %>
+<%= button_to 'Unlike', joke_likes_path(@joke, pre_like), method: "delete" %>
 <br>
+<% #else %>
+<%= button_to 'Like', joke_likes_path(@joke), method: "post" %>
+<%# end %>
 
-<%= form_for @comment do |f| %>
-    
+<br>
+<% if @joke.user == current_user %>
+<%= link_to "Edit", edit_user_joke_path(@joke), class: "btn purple darken-1"%>
+<%= link_to "Delete", user_joke_path(@joke), method: "delete", class: "btn purple darken-1"%>
 <% end %>

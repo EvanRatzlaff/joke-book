@@ -1,0 +1,28 @@
+<ul>
+<%# render_room_error %>
+</ul>
+
+<%= form_for [user, room] do |f| %>
+<div class="input-field">
+    <%= f.text_field :name %>
+    <%= f.label :name %>
+</div>
+ <p>
+      <label>
+        <input type="checkbox" name="room[performance_charge]" <%= "checked" if room.performance_charge %> />
+        <span>Performance Charge</span>
+      </label>
+    </p>
+
+<div class="input-field">
+    <%= f.text_field :location %>
+    <%= f.label :location %>
+</div>
+<br>
+<div class="input-field">
+    <%= f.text_field :description %>
+    <%= f.label :description %>
+</div>
+
+<%= f.submit button_name, class: "btn purple darken-1"  %>
+<% end %>

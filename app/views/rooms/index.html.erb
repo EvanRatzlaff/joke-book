@@ -1,9 +1,32 @@
-<h3 class="alignleft">Check Out These Rooms For Your Next Performance</h3>
-Needed for this page:<br>
 <ul>
-<h4>
-<li>search by room </li>
-<li>description for each room </li>
-<li>link to view jokes told in those rooms by users </li>
-</ul>
-</h4>
+<label> Search through existing rooms here</label>
+<%= form_tag user_rooms_path(@user), method: "get" do %>
+    <%= text_field_tag :query %>
+    <%= submit_tag :search, class: "btn purple darken-1" %>
+    
+<% end %>
+<h4 class="alignleft">Rooms:</h4>
+<%= link_to "Create A New Room", new_user_room_path(current_user) %>
+<br>
+<table class="highlight"> 
+    <thead>
+    <tr>
+        <th> Room Name </th>
+        <% if current_user == @user %>
+        <th>Location</th>
+        <th>Description</th>
+        <th>Performance Charge?</th>
+        <% end%>
+    </tr>
+    </thead>
+    <tbody>
+    <% @rooms.each do |r|%>
+    <tr>
+    <td><%= link_to r.name, user_rooms_path(@user, r) %></td>
+     <td><%= r.location %></td>
+    <td><%=  r.description %></td>
+    <td><%=  r.performance_charge %></td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>

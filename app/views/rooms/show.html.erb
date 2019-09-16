@@ -1,0 +1,21 @@
+<h1><%= @room.name %></h1>
+    
+<table class="striped"> 
+    <thead>
+    <tr>
+        <th> Jokes Performed in This Room</th>
+        <% if current_user == @user %>
+        <th>Performer</th>
+        <th> </th>
+        <% end%>
+    </tr>
+    </thead>
+    <tbody>
+    <% @jokes.each do |joke|%>
+    <tr>
+    <td><%= link_to joke.title, user_joke_path(@user, joke) %></td>
+    <td><%= link_to joke.user.username, user_room_path(@user, joke) %></td>
+    </tr>
+    <% end %>
+    </tbody>
+</table>

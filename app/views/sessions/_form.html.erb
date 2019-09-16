@@ -1,19 +1,25 @@
+<h2>
+<% if flash[:alert].present? %>
+<%= flash[:alert] %>
+<%end%>
+</h2>
 
+<%= form_for user, url: session_form_path, method: "POST" do |f| %>
 
-<%= form_for @user do |f| %>
-
-    <ul>
+    <div class="input-field">
     <%= f.label :email %>
-    <li><%= f.text_field :email %></li>
+    <%= f.text_field :email %>
+    </div>
     <br>
-    <br>
+    <div class="input-field">
     <%= f.label :username %>
     <%= f.text_field :username %>
+    </div>
     <br>
-    <br>
+    <div class="input-field">
     <%= f.label :password %>
     <%= f.password_field :password %>
-    </ul>
+    </div>
     <br>
-    <%= f.submit "Create An Account", class: "btn-submit" %>
+    <%= f.submit button_name, class: "btn" %>
     <% end %>

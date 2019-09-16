@@ -3,10 +3,10 @@ class HomeController < ApplicationController
     def index
         @user = current_user if logged_in?
             if !logged_in?
-            flash[:alert] = "Please Sign in to get started."
+            flash[:success] = "Logged in."
             else 
                 render :signup
-            end
+        end
     end
 
 end

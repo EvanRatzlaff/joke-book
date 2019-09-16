@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
     helper_method :logged_in?
 
     def redirect_for_logged_in
-        redirect_to users_path if logged_in?
+        redirect_to user_jokes_path(current_user) if logged_in?
     end
 
     def redirect_for_logged_out

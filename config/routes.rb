@@ -1,24 +1,37 @@
 Rails.application.routes.draw do
   root  'home#index'
-  get '/auth/facebook/callback', to: 'sessions#create'
-  get '/login', to: "sessions#login", as: "login"
-  post '/login', to: "sessions#post_login"
+  get '/auth/facebook/callback' => 'sessions#create'
   
-  get '/signup', to: "users#signup", as: "signup"
-  post '/signup', to: "users#post_signup"
+  get '/signup', to: "users#new", as: "signup" #<- signup_path
+  post '/signup', to: "users#create"
 
-  get '/profile', to: "users#show", as: "profile"
+  get '/login', to: "sessions#new", as: "login" #<- login_path
+  post '/login', to: "sessions#create"
   
+  get '/profile', to: "users#show", as: "profile" #<- profile_path
   
-  delete '/logout', to: 'sessions#destroy', as: 'logout'
-  
+  resources :sessions
+  delete '/logout', to: 'sessions#destroy', as: 'logout' #<- logout_path
+
+  resources :users do
+    resources :jokes
+    resources :rooms
+    resources :likes
+  end
   resources :rooms
   resources :jokes
+ 
+  resources :jokes do
+    resources :comments
+  end
+
+  resources :jokes do
+    resources :likes
+  end
 
   resources :users do 
-    resources :comments, :except => [:update, :destroy, :show, :new]
+    resources :comments, :except => [ :destroy]
   end
   resources :comments, :only => [:update, :destroy]
-  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

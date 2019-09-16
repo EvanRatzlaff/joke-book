@@ -16,14 +16,15 @@
       <a href="#" class="brand-logo">JokeBook</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
       <% if logged_in?%>
-        <li><%= link_to "Make a Joke", new_joke_path %></li>
-        <li><%= link_to "Show Rooms", rooms_path %></li>
-        <li><%= link_to "My Jokes", jokes_path %></li>
+        <li><%= link_to "Make a Joke", new_user_joke_path(current_user) %></li>
+        <li><%= link_to "Show Rooms", user_rooms_path(current_user) %></li>
+        <li><%= link_to "My Jokes", user_jokes_path(current_user) %></li>
         <li><%= link_to "Logout", logout_path, method: "delete" %></li>
       <%else%>
               <li><%= link_to "Signup", signup_path %></li>
               <li><%= link_to "Login", login_path %></li>
       <% end %>
+     
 
       </ul>
     </div>

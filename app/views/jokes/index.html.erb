@@ -1,18 +1,27 @@
-<h1 class="center">Jokes that you've logged</h1>
+<h3 class="center">Hey <%= @user.username %>, Here's Where You Can Find Your Jokes, Click "Make a Joke" to begin!</h3>
+<%= form_tag user_jokes_path(@user), method: "get" do %>
+    <%= text_field_tag :query %>
+    <%= submit_tag :search, class: "btn purple darken-1" %>
+<% end %>
+
 <table class="highlight"> 
     <thead>
     <tr>
         <th> Title </th>
+        <% if current_user == @user %>
+        <th>Room Performed</th>
         <th> Edit </th>
         <th> Delete </th>
+        <% end %>
     </tr>
     </thead>
     <tbody>
     <% @jokes.each do |joke|%>
     <tr>
-    <td><%= link_to joke.title, joke_path(joke) %></td>
-    <td><%= link_to "Edit Joke", "#" %></td>
-    <td><%= link_to "Delete Joke", "#" %></td>
+    <td><%= link_to joke.title, user_joke_path(@user, joke) %></td>
+    <td><%= link_to joke.room.name, user_room_path(@user, joke.room) %></td>
+    <td><%= link_to "Edit", edit_user_joke_path(@user, joke) %></td>
+    <td><%= link_to "Delete", user_joke_path(@user, joke), method: "delete" %></td>
     </tr>
     <% end %>
     </tbody>

@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
  gem 'omniauth'
  gem 'omniauth-facebook'
  gem 'dotenv-rails'
+ gem 'jquery-rails'
 #  gem 'omniauth-google-oauth2'
 
 

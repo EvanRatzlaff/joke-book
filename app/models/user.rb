@@ -5,15 +5,20 @@ class User < ApplicationRecord
     validates :password, presence: true, on: :create
     has_secure_password
 
-     has_many :comments
+    
      has_many :jokes
      has_many :rooms, through: :jokes
+     has_many :likes, dependent: :destroy
 
-     def self.from_omniauth(auth)
-        where(email: auth.info.email).first_or_initialize do |user|
-            user.name = auth.info.name
-            user.email = auth.info.email
-        end
+     def self.find_or_create_by_omniauth(auth)
+       user = User.find_by(email: auth['info']['email'])
+
+       if user.nil?
+        user = User.create(email: auth['info']['email'], username: auth['info']['email'], password: SecureRandom.hex, uid: auth['uid'])
+        elsif user.uid.nil?
+            user.update(uid:auth['uid'])
+        end 
+        user
      end
-
+    
 end
